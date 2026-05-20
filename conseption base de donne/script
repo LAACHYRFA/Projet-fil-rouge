@@ -1,0 +1,83 @@
+CREATE DATABASE IF NOT EXISTS salle_de_sport;
+USE salle_de_sport;
+
+-- --------------------------------------------------------
+-- 1. Table : ADMIN
+-- --------------------------------------------------------
+CREATE TABLE `admin` (
+  `id_admin` INT(11) NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(50) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id_admin`)
+) ;
+
+-- --------------------------------------------------------
+-- 2. Table : ABONNEMENT
+-- --------------------------------------------------------
+CREATE TABLE `abonnement` (
+  `id_ab` INT(11) NOT NULL AUTO_INCREMENT,
+  `titre` VARCHAR(100) NOT NULL,
+  `prix` DECIMAL(10,2) NOT NULL,
+  `description` TEXT DEFAULT NULL,
+  `id_admin` INT(11) DEFAULT NULL,
+  PRIMARY KEY (`id_ab`),
+  FOREIGN KEY (`id_admin`) REFERENCES `admin`(`id_admin`) ON DELETE SET NULL ON UPDATE CASCADE
+) ;
+
+-- --------------------------------------------------------
+-- 3. Table : UTILISATEUR
+-- --------------------------------------------------------
+CREATE TABLE `utilisateur` (
+  `id_utilisateur` INT(11) NOT NULL AUTO_INCREMENT,
+  `nom_complet` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(100) NOT NULL UNIQUE,
+  `password` VARCHAR(255) NOT NULL,
+  `telephone` VARCHAR(20) DEFAULT NULL,
+  `photo` VARCHAR(255) DEFAULT NULL, -- Stockage du chemin/URL de l'image en VARCHAR
+  `date_inscription` DATE NOT NULL,
+  `id_ab` INT(11) DEFAULT NULL, -- Clé étrangère reliant l'utilisateur à son abonnement (Relation 1,1 <-> 1,n)
+  PRIMARY KEY (`id_utilisateur`),
+  FOREIGN KEY (`id_ab`) REFERENCES `abonnement`(`id_ab`) ON DELETE SET NULL ON UPDATE CASCADE
+) ;
+
+-- --------------------------------------------------------
+-- 4. Table : COACH
+-- --------------------------------------------------------
+CREATE TABLE `coach` (
+  `id_coach` INT(11) NOT NULL AUTO_INCREMENT,
+  `nom_complet` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(100) DEFAULT NULL,
+  `specialite` VARCHAR(100) DEFAULT NULL,
+  `telephone` VARCHAR(20) DEFAULT NULL,
+  `id_admin` INT(11) DEFAULT NULL,
+  PRIMARY KEY (`id_coach`),
+  FOREIGN KEY (`id_admin`) REFERENCES `admin`(`id_admin`) ON DELETE SET NULL ON UPDATE CASCADE
+) ;
+
+-- --------------------------------------------------------
+-- 5. Table : EQUIPEMENT
+-- --------------------------------------------------------
+CREATE TABLE `equipement` (
+  `id_eq` INT(11) NOT NULL AUTO_INCREMENT,
+  `nom` VARCHAR(100) NOT NULL,
+  `categorie` VARCHAR(50) DEFAULT NULL,
+  `quantite` INT(11) DEFAULT 0,
+  `etat` VARCHAR(50) DEFAULT NULL,
+  `id_admin` INT(11) DEFAULT NULL,
+  PRIMARY KEY (`id_eq`),
+  FOREIGN KEY (`id_admin`) REFERENCES `admin`(`id_admin`) ON DELETE SET NULL ON UPDATE CASCADE
+) ;
+
+-- --------------------------------------------------------
+-- 6. Table : MESSAGE
+-- --------------------------------------------------------
+CREATE TABLE `message` (
+  `id_msg` INT(11) NOT NULL AUTO_INCREMENT,
+  `nom` VARCHAR(100) DEFAULT NULL,
+  `email` VARCHAR(100) DEFAULT NULL,
+  `contenu` TEXT DEFAULT NULL,
+  `date_envoi` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `id_admin` INT(11) DEFAULT NULL,
+  PRIMARY KEY (`id_msg`),
+  FOREIGN KEY (`id_admin`) REFERENCES `admin`(`id_admin`) ON DELETE SET NULL ON UPDATE CASCADE
+) 4;
