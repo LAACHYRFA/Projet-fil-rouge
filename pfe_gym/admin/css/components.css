@@ -1,0 +1,40 @@
+.card, .message-card, .coach-card {
+  background-color: #1a1a1a;
+   border: 1px solid #252525;
+    border-radius: 12px;
+     padding: 30px;
+     }
+
+.dashboard-cards { 
+ display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+   gap: 30px; 
+  }
+
+  
+.message-card { background-color: #ffffff; 
+ color: #111111;
+  padding: 25px 30px;
+   box-shadow: 0 10px 25px rgba(0,0,0,0.3); 
+  }
+
+.btn-submit { background-color: #FF0000;
+  color: #ffffff; border: none;
+   padding: 12px 30px; 
+   font-size: 14px; 
+   font-weight: 700;
+    border-radius: 6px; 
+    cursor: pointer;
+     text-transform: uppercase;
+     }
+
+.btn-edit { color: #0077ff; 
+ text-decoration: none;
+  font-weight: 600;
+   margin-right: 15px; 
+  }
+
+.btn-supprimer { color: #cc0000;
+  text-decoration: none; 
+  font-weight: 600; 
+ }
