@@ -1,3 +1,12 @@
+
+<?php
+require "assets/config/connexion.php";
+
+$stmt = $pdo->query("SELECT * FROM abonnement");
+$abonnements = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -12,20 +21,21 @@
 
     <header class="main_header">
         <div class="header_logo">
-            <img src="assets/images/page_acceuil/logo.png" alt="Logo Fitness Pro" class="logo_img">
+            <img src="assets/images/page_acceuil/logo.png" alt="Logo" class="logo_img">
             <span>FITNESS PRO</span>
         </div>
         <nav class="header_nav">
             <ul class="nav_links">
                 <li><a href="index.php" class="active">Accueil</a></li>
-                <li><a href="abonnements.php">Abonnement</a></li>
-                <li><a href="coachs.php">Coachs</a></li>
+               <li><a href="#abonnement">Abonnement</a></li>
+                <li><a href="coachs.php" >Coachs</a></li>
                 <li><a href="equipements.php">Equipement</a></li>             
-                <li><a href="contact.php">Contact</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
+    
     <section class="hero_section" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/images/page_acceuil/acceuil_bground.jpg'); height: 85vh; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; text-align: center;">   
         <div class="hero_content">
             <h1 class="hero_title" style="font-size: 48px; font-weight: 900; letter-spacing: 2px; color: #fff; margin-bottom: 20px;">TRANSFORMEZ VOTRE CORPS</h1>
@@ -33,46 +43,29 @@
         </div>
     </section>
 
-    <div class="container">
-        <h2 class="section-title" style="text-align: center; font-size: 30px; margin-bottom: 40px; text-transform: uppercase;">Choisissez votre <span>forfait</span></h2>
-        
-        <div class="pricing-grid">
-            <div class="custom-card">
-                <h3 style="color: #FF0000; font-size: 22px;">DÉCOUVERTE</h3>
-                <div class="card-price">29€<span style="font-size: 14px; font-weight: normal; color: #aaa;">/mois</span></div>
-                <ul style="list-style: none; margin: 15px 0; padding: 0; color: #ccc; display: flex; flex-direction: column; gap: 8px;">
-                    <li>✓ Coaching en ligne</li>
-                    <li>✓ Cours collectifs</li>
-                    <li>✓ Accès à l'application</li>
-                </ul>
-                <a href="reservation.php" class="btn-submit">Réserver</a>
-            </div>
+   <div id="abonnement" class="container">
+    <h2 class="section-title" style="text-align: center; font-size: 30px; margin-bottom: 40px; text-transform: uppercase;">Choisissez votre <span>forfait</span></h2>
+    <div class="pricing-grid">
 
-            <div class="custom-card" style="border-color: #FF0000; position: relative;">
-                <span style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #FF0000; color: #fff; padding: 4px 12px; font-size: 11px; font-weight: bold; border-radius: 20px;">POPULAIRE</span>
-                <h3 style="color: #FF0000; font-size: 22px; margin-top: 5px;">PREMIUM</h3>
-                <div class="card-price">49€<span style="font-size: 14px; font-weight: normal; color: #aaa;">/mois</span></div>
-                <ul style="list-style: none; margin: 15px 0; padding: 0; color: #ccc; display: flex; flex-direction: column; gap: 8px;">
-                    <li>✓ Coach dédié</li>
-                    <li>✓ Plan nutritionnel</li>
-                    <li>✓ 3 séances/semaine</li>
-                    <li>✓ Suivi personnalisé</li>
-                </ul>
-                <a href="reservation.php" class="btn-submit">Réserver</a>
-            </div>
+         <?php
+        if ($abonnements) {
+            foreach ($abonnements as $item) {
+                $desc = str_replace(',', '<br>', htmlspecialchars($item['description']));
+                echo "<div class='custom-card pricing-card'>
+                        <h3>" . htmlspecialchars($item['nom']) . "</h3>
+                        <div class='card-price'>" . htmlspecialchars($item['prix_total']) . " 💲</div>
+                        <p class='card-duration'>📅 Durée: " . htmlspecialchars($item['duree']) . "</p>
+                        <p class='card-desc'>$desc</p>
+                        <a href='signup.php?id_ab=" . $item['id_ab'] . "' class='btn-submit'>Réserver</a>
+                      </div>";
+            }
+        } else {
+            echo "<p style='text-align:center; grid-column: 1/-1;'>Aucun abonnement disponible pour le moment.</p>";
+        }
+        ?>
 
-            <div class="custom-card">
-                <h3 style="color: #FF0000; font-size: 22px;">ÉLITE</h3>
-                <div class="card-price">79€<span style="font-size: 14px; font-weight: normal; color: #aaa;">/mois</span></div>          
-                <ul style="list-style: none; margin: 15px 0; padding: 0; color: #ccc; display: flex; flex-direction: column; gap: 8px;">
-                    <li>✓ Tout Premium</li>
-                    <li>✓ Séances quotidiennes</li>
-                    <li>✓ Accès illimité</li>
-                </ul>
-                <a href="reservation.php" class="btn-submit">Réserver</a>
-            </div>
-        </div>
     </div>
+</div>
  
     <div class="container">
         <h2 class="section-title" style="text-align: center; font-size: 30px; margin-bottom: 40px; text-transform: uppercase;">Nos <span>coachs</span></h2>
@@ -104,7 +97,7 @@
         </div>
     </div>
 
-    <footer class="main-footer">
+    <footer class="main-footer"  id="contact">
         <div class="footer-top">
             <div class="footer-brand">
                 <div class="footer-logo">

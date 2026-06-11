@@ -12,27 +12,6 @@
     margin: 0 auto;             
 }
 
-@media (min-width: 768px) {
-    .cards-grid {
-        grid-template-columns: repeat(2, 1fr); 
-    }
-}
-
-/* الجريد الخاص بالاشتراكات : 3 ف السطر */
-.pricing-grid {
-    display: grid;
-    grid-template-columns: 1fr; 
-    gap: 25px;                  
-    width: 100%;
-    max-width: 1100px;       
-    margin: 40px auto;         
-}
-
-@media (min-width: 992px) {
-    .pricing-grid {
-        grid-template-columns: repeat(3, 1fr); 
-    }
-}
 
 
 /* ==========================================================================
@@ -108,4 +87,12 @@
     margin: 10px 0;
     display: block;
     width: 100%;
+}
+.pricing-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.pricing-card .btn-submit {
+    margin-top: auto;
 }

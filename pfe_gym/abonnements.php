@@ -18,18 +18,20 @@ $abonnements = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
 
-    <header class="main_header">
+ <header class="main_header">
         <div class="header_logo">
-            <img src="assets/images/page_acceuil/logo.png" alt="Logo" class="logo_img">
-            <span>FITNESS PRO</span>
+            <img src="assets/images/page_acceuil/logo.png" alt="Logo Fitness Pro" class="logo_img">
+            <span style="font-family: 'Arial Black', Gadget, sans-serif;text-transform: uppercase;">FITNESS PRO</span>
         </div>
-        <ul class="nav_links">
-            <li><a href="index.php">Accueil</a></li>
-            <li><a href="coachs.php">Coachs</a></li>
-            <li><a href="equipements.php">Équipements</a></li>
-            <li><a href="abonnements.php" class="active">Abonnements</a></li>
-            <li><a href="contact.php">Contact</a></li>
-        </ul>
+        <nav class="header_nav">
+            <ul class="nav_links">
+                <li><a href="index.php" >Accueil</a></li>
+                <li><a href="abonnements.php" class="active">Abonnement</a></li>
+                <li><a href="coachs.php">Coachs</a></li>
+                <li><a href="equipements.php">Equipement</a></li>             
+                <li><a href="contact.php">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
    <div class="container">

@@ -43,10 +43,11 @@ if (isset($_POST['connexion'])) {
 <head>
     <meta charset="UTF-8">
     <title>Connexion - Fitness Pro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/forms_tables.css">
+
+      <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/forms_tables.css">
+</head>
 </head>
 <body class="login-body"> 
     
